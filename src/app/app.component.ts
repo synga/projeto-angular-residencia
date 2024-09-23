@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContatosComponent } from './contatos/contatos.component'; // Importando o componente
+import { ContatosComponent } from './pages/contatos/contatos.component'; // Importando o componente
 
 @Component({
   selector: 'app-root',

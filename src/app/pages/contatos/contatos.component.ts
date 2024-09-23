@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ContatosService, Contato } from '../contatos.service';
+import { ContatosService } from '../../services/contatos/contatos.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
+import { Contato } from '../../interfaces/contato.interface';
 
 @Component({
   selector: 'app-contatos',
@@ -15,23 +16,17 @@ import { MatListModule } from '@angular/material/list';
   styleUrls: ['./contatos.component.css'],
   imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatListModule],
 })
-export class ContatosComponent implements OnInit {
-  contatosForm: FormGroup;
-  contatos: Contato[] = [];
+export class ContatosComponent {
+  private _contatos = inject(ContatosService);
+  private fb = inject(FormBuilder);
 
-  constructor(private fb: FormBuilder, private contatosService: ContatosService) {
-    this.contatosForm = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required]
-    });
-  }
+  contatosForm: FormGroup = this.fb.group({
+    nome: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    telefone: ['', Validators.required]
+  });
 
-  ngOnInit() {
-    this.contatosService.contatos$.subscribe(data => {
-      this.contatos = data;
-    });
-  }
+  public contatos = computed(() => this._contatos.contatos());
 
   adicionarContato() {
     if (this.contatosForm.valid) {
@@ -39,7 +34,7 @@ export class ContatosComponent implements OnInit {
         id: this.contatos.length + 1,
         ...this.contatosForm.value
       };
-      this.contatosService.adicionarContato(novoContato);
+      this._contatos.adicionarContato(novoContato);
       this.contatosForm.reset();
     }
   }
