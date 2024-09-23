@@ -7,14 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-contatos',
   standalone: true, // Isso deve estar aqui
   templateUrl: './contatos.component.html',
   styleUrls: ['./contatos.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatListModule, BrowserAnimationsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatListModule],
 })
 export class ContatosComponent implements OnInit {
   contatosForm: FormGroup;
