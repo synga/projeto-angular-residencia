@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ContatosComponent } from './contatos/contatos.component'; // Importando o componente
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true, // Modo standalone
+  imports: [ContatosComponent] // Adicione aqui
 })
 export class AppComponent {
   title = 'lista-contatos';

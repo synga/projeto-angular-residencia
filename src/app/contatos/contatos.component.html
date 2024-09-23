@@ -1,0 +1,38 @@
+<div class="contatos-container">
+  <h2>Lista de Contatos</h2>
+
+  <form [formGroup]="contatosForm" (ngSubmit)="adicionarContato()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" required />
+      <mat-error *ngIf="contatosForm.get('nome')?.invalid && contatosForm.get('nome')?.touched">
+        Nome é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" required />
+      <mat-error *ngIf="contatosForm.get('email')?.invalid && contatosForm.get('email')?.touched">
+        E-mail inválido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" required />
+      <mat-error *ngIf="contatosForm.get('telefone')?.invalid && contatosForm.get('telefone')?.touched">
+        Telefone é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Adicionar Contato</button>
+  </form>
+
+  <mat-list>
+    <h3 mat-subheader>Contatos</h3>
+    <mat-list-item *ngFor="let contato of contatos">
+      {{ contato.nome }} - {{ contato.email }} - {{ contato.telefone }}
+    </mat-list-item>
+  </mat-list>
+</div>
